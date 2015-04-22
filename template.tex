@@ -1,0 +1,82 @@
+\documentclass[xcolor=x11names]{beamer}
+%% General document %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,bm}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{default}
+
+\usepackage{url}
+
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+
+\title{Title}
+\subtitle{Subtitle}
+\author{Daniel Suess}
+\date{\today}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\tr}{\mathrm{Tr}\, }
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\adj}[1]{#1^{\dagger}}
+\newcommand{\cc}[1]{#1^\ast}
+\newcommand{\bra}[1]{\langle#1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\mat}[1]{\mathbf{#1}}
+\renewcommand{\quote}[1]{\glqq #1\grqq{}}
+
+
+%% Beamer Notes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{pgfpages}
+%\setbeameroption{show notes on second screen}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%TODO: Variablenbezeichnungen in den Kohärenzbildern entfernen
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Section}
+\subsection{Subsection}
+
+\begin{frame}
+  \begin{block}
+    This is a place holder
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+\begin{thebibliography}{9}
+\bibitem[JS06]{}
+K.~Jacobs and D.~Steck.
+\newblock A straightforward introduction to continuous quantum measurement.
+\newblock {\em Contemporary Physics}, 47(5):24, 2006.
+\end{thebibliography}
+\end{frame}
+
+%---------------------------------------------------------------------------------------------------------------------------------------------------------------
+{ % black page
+\setbeamercolor{background canvas}{bg=black}
+\frame[plain]{}
+} 
+
+\end{document}
