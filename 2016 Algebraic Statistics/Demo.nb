@@ -1,0 +1,209 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7351,        200]
+NotebookOptionsPosition[      6700,        175]
+NotebookOutlinePosition[      7072,        192]
+CellTagsIndexPosition[      7029,        189]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Formula", " ", "=", " ", 
+  RowBox[{"Exists", "[", 
+   RowBox[{
+    RowBox[{"Evaluate", "[", "EliminatedVars", "]"}], ",", " ", 
+    "Constraints"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.663572535305159*^9, 3.663572559210133*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Result", " ", "=", " ", 
+  RowBox[{"Resolve", "[", 
+   RowBox[{"Formula", ",", " ", "Reals"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.663572599629383*^9, 3.6635726051279716`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"Result", ",", " ", 
+   RowBox[{"And", "@@", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"#", ">", "0"}], ")"}], "&"}], " ", "/@", " ", "Vars"}], 
+     ")"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.663572640610676*^9, 3.6635726699667053`*^9}, {
+  3.663572790488693*^9, 3.6635727958711777`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Simplify", "[", 
+  RowBox[{"Result", ",", " ", 
+   RowBox[{
+    RowBox[{"And", " ", "@@", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"#", ">", "0"}], ")"}], "&"}], " ", "/@", " ", 
+       RowBox[{"Vars", "[", 
+        RowBox[{"[", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "4", ",", "5", ",", "6", ",", "7", ",", "8"}], 
+          "}"}], "]"}], "]"}]}], ")"}]}], " ", "&&", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["p", 
+       RowBox[{"1", ",", "1", ",", "1", " "}]], ">=", " ", "0"}], ")"}], "&&", 
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["p", 
+       RowBox[{"1", ",", "2", ",", "1", " "}]], ">=", " ", "0"}], ")"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.663572723597287*^9, 3.663572730649364*^9}, {
+  3.6635727690521603`*^9, 3.663572771723469*^9}, {3.66357280500825*^9, 
+  3.663572808966867*^9}, {3.6635728416798077`*^9, 3.663572844120113*^9}, {
+  3.6635729011394777`*^9, 3.663572970816895*^9}, {3.663573137370019*^9, 
+  3.6635731829371634`*^9}}],
+
+Cell[" ", "Text",
+ Editable->False,
+ Selectable->False,
+ CellFrame->{{0, 0}, {0, 3}},
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {1, 1}},
+ CellElementSpacings->{"CellMinHeight"->1},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0, 0, 1],
+ CellSize->{Inherited, 5}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.663574094087008*^9, 3.663574095723435*^9}, {
+  3.663658414609796*^9, 3.6636584152728*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Formula", " ", "=", " ", 
+  RowBox[{"Exists", "[", 
+   RowBox[{
+    RowBox[{"Evaluate", "[", 
+     SubscriptBox["EliminatedVars", "HV"], "]"}], ",", " ", 
+    SubscriptBox["Constraints", "HV"]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.663575361076316*^9, 3.663575364637672*^9}, {
+  3.663607787802712*^9, 3.663607797166193*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["Result", "HV"], "=", 
+  RowBox[{"Resolve", "[", 
+   RowBox[{"Formula", ",", "Reals"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.663574227360817*^9, 3.6635742412532177`*^9}, {
+   3.66357459125093*^9, 3.66357459777835*^9}, 3.6635751665234203`*^9, {
+   3.6636077855523043`*^9, 3.6636078016384897`*^9}}],
+
+Cell[" ", "Text",
+ Editable->False,
+ Selectable->False,
+ CellFrame->{{0, 0}, {0, 3}},
+ ShowCellBracket->False,
+ CellMargins->{{0, 0}, {1, 1}},
+ CellElementSpacings->{"CellMinHeight"->1},
+ CellFrameMargins->0,
+ CellFrameColor->RGBColor[0, 0, 1],
+ CellSize->{Inherited, 5}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.663575162214388*^9, 3.6635751642500057`*^9}, {
+  3.663575375783592*^9, 3.663575376468357*^9}, {3.663658417224773*^9, 
+  3.663658417488558*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Formula", "=", 
+  RowBox[{"ForAll", "[", 
+   RowBox[{
+    RowBox[{"Evaluate", "[", 
+     SubscriptBox["Vars", "HV"], "]"}], ",", 
+    RowBox[{
+     SubscriptBox["Result", "HV"], " ", "\[Equivalent]", " ", 
+     RowBox[{"And", " ", "@@", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"#", "\[GreaterEqual]", "0"}], ")"}], "&"}], " ", "/@", " ", 
+        SubscriptBox["Vars", "HV"]}], ")"}]}]}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Resolve", "[", 
+  RowBox[{"Formula", ",", " ", "Reals"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.663574557359727*^9, 3.663574585434431*^9}, {
+   3.663574616063807*^9, 3.6635746673861523`*^9}, 3.66357496784923*^9, {
+   3.663575205646185*^9, 3.663575234918228*^9}, {3.6635752701239843`*^9, 
+   3.663575288553603*^9}, {3.6636078826167917`*^9, 3.6636079140514917`*^9}}]
+},
+WindowSize->{1440, 851},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->2,
+FrontEndVersion->"10.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 23, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 258, 6, 56, "Input"],
+Cell[819, 28, 205, 4, 56, "Input"],
+Cell[1027, 34, 390, 11, 56, "Input"],
+Cell[1420, 47, 1066, 28, 93, "Input"],
+Cell[2489, 77, 271, 9, 20, "Text"],
+Cell[2763, 88, 1034, 15, 1278, "Input"],
+Cell[3800, 105, 353, 8, 56, "Input"],
+Cell[4156, 115, 339, 7, 56, "Input"],
+Cell[4498, 124, 271, 9, 20, "Text"],
+Cell[4772, 135, 1038, 15, 1212, "Input"],
+Cell[5813, 152, 883, 21, 90, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

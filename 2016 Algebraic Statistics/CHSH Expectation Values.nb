@@ -1,0 +1,364 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13196,        355]
+NotebookOptionsPosition[     12424,        325]
+NotebookOutlinePosition[     12777,        341]
+CellTagsIndexPosition[     12734,        338]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.662821373140942*^9, 3.662821394946254*^9}}],
+
+Cell[TextData[{
+ "For computational reasons, we need to create a vector containing all \
+probabilities or expectation values. For this matter we create a signature \
+array, which is defined as follows:\n- for the probability vector ",
+ StyleBox["p", "Code"],
+ ", ",
+ StyleBox["sig[i][j] == 1", "Code"],
+ " if ",
+ StyleBox["p[i]", "Code"],
+ " contains the probability clause ",
+ StyleBox["P(X_j == 1)", "Code"],
+ ", otherwise it contains ",
+ StyleBox["P(X_j == -1)", "Code"],
+ ". \n- for the expectation vector ",
+ StyleBox["E", "Code"],
+ ",  ",
+ StyleBox["sig[i][j] == 1", "Code"],
+ " the random variable ",
+ StyleBox["X_i", "Code"],
+ " is included in the expectation value"
+}], "Text",
+ CellChangeTimes->{{3.6623911802804337`*^9, 3.662391383592702*^9}, {
+   3.662391453686797*^9, 3.6623915271670427`*^9}, {3.662391566971285*^9, 
+   3.662391631874175*^9}, {3.662391746379423*^9, 3.662391749088491*^9}, {
+   3.6623919222208767`*^9, 3.6623919241723747`*^9}, {3.6623935094522047`*^9, 
+   3.662393561082225*^9}, 3.6623945347818336`*^9, 3.6624076244220953`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Computes", " ", "the", " ", "signature", " ", "for", " ", "n", " ", 
+    "dichotomic", " ", 
+    RowBox[{"variables", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"GetSignature", "[", "n_", "]"}], " ", ":=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"IntegerDigits", "[", 
+      RowBox[{"i", ",", " ", "2", ",", " ", "n"}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "0", ",", 
+       RowBox[{
+        RowBox[{"n", "^", "2"}], " ", "-", " ", "1"}]}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ InitializationCell->True],
+
+Cell[CellGroupData[{
+
+Cell["CHSH for Expectation Values", "Chapter",
+ CellChangeTimes->{{3.662651606209457*^9, 3.6626516114476347`*^9}, {
+  3.662651687756384*^9, 3.6626517105163116`*^9}, {3.662651752644001*^9, 
+  3.6626517610436277`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Computes", " ", "the", " ", "transition", " ", "matrix", " ", "defined", 
+     " ", "by", " ", "p"}], " ", "=", " ", 
+    RowBox[{"TE", " ", 
+     RowBox[{"(", 
+      RowBox[{
+      "note", " ", "that", " ", "this", " ", "is", " ", "different", " ", 
+       "than", " ", "the", " ", "one", " ", "defined", " ", "by", " ", 
+       "Rafael"}], " "}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"GetTrans", "[", "sigs_", "]"}], " ", ":=", 
+    RowBox[{"Inverse", "[", " ", 
+     RowBox[{"Table", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Times", " ", "@@", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"1", "-", 
+              RowBox[{"2", "*", 
+               SubscriptBox["sig", "E"]}]}], ")"}], "^", 
+            RowBox[{"(", 
+             RowBox[{"1", "+", 
+              SubscriptBox["sig", "p"]}], ")"}]}], ")"}]}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           SubscriptBox["sig", "p"], ",", " ", "sigs"}], "}"}]}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["sig", "E"], ",", " ", "sigs"}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], "]"}]}], ";"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.66239246935397*^9, 3.6623924722127953`*^9}, {
+   3.662392546145698*^9, 3.662392574424168*^9}, {3.6623926268954277`*^9, 
+   3.6623926604222717`*^9}, {3.662392740521881*^9, 3.662392807595014*^9}, {
+   3.6623928529623404`*^9, 3.662392950922756*^9}, {3.662392982108366*^9, 
+   3.662392988859964*^9}, {3.6623937461411133`*^9, 3.662393911377625*^9}, {
+   3.662394557472842*^9, 3.6623945665589333`*^9}, {3.662394706337453*^9, 
+   3.662394706944151*^9}, 3.662394773664747*^9, {3.662394853941299*^9, 
+   3.662394867421851*^9}}],
+
+Cell[TextData[{
+ "We encode the fiducial probability random variable in the following order: ",
+ StyleBox["A0A1B0B1...", "Code"]
+}], "Text",
+ CellChangeTimes->{{3.662397746973874*^9, 3.662397772626998*^9}, {
+  3.662397839348073*^9, 3.66239785597948*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "I", " ", "am", " ", "a", " ", "little", " ", "bit", " ", "embarased", " ",
+     "by", " ", 
+    RowBox[{"this", " ", ":", 
+     RowBox[{"(", " "}]}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"HasNonobservale", "[", "x_", "]"}], ":=", 
+    RowBox[{"Or", " ", "@@", " ", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"2", "*", "i"}], " ", "-", " ", "1"}], "]"}], "]"}], "*", 
+         
+         RowBox[{"x", "[", 
+          RowBox[{"[", 
+           RowBox[{"2", "*", "i"}], "]"}], "]"}]}], " ", "\[NotEqual]", " ", 
+        "0"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", " ", 
+         RowBox[{
+          RowBox[{"Length", "[", "x", "]"}], " ", "/", "2"}]}], "}"}]}], 
+      "]"}]}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"GenerateEliminations", "[", "sigs_", "]"}], " ", ":=", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"elims", "=", 
+         RowBox[{"List", "[", "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Do", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"HasNonobservale", "[", 
+             RowBox[{"sigs", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"elims", " ", "=", " ", 
+             RowBox[{"Append", "[", 
+              RowBox[{"elims", ",", " ", "i"}], "]"}]}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", " ", 
+            RowBox[{"Length", "[", "sigs", "]"}]}], "}"}]}], 
+         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        "elims"}]}], "\[IndentingNewLine]", "]"}]}], ";"}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.662397740125143*^9, 3.662397744871258*^9}, 
+   3.6624018257072487`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Generate", " ", "Variable", " ", "names", " ", "for", " ", "expectation", 
+    " ", "values"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"GenerateNames", " ", "[", 
+     RowBox[{"sigs_", ",", "varnames_"}], "]"}], ":=", 
+    RowBox[{"Table", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ToExpression", "[", 
+       RowBox[{"StringJoin", "[", 
+        RowBox[{"Pick", "[", 
+         RowBox[{"varnames", ",", " ", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"#", " ", "\[Equal]", " ", "1"}], ")"}], "&"}], " ", "/@",
+            "\[NonBreakingSpace]", "sig"}]}], "]"}], "]"}], "]"}], ",", " ", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"sig", ",", 
+        RowBox[{"sigs", "[", 
+         RowBox[{"[", 
+          RowBox[{"2", ";;", 
+           RowBox[{"Length", "[", "sigs", "]"}]}], "]"}], "]"}]}], "}"}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.662401781992012*^9, 3.662401831394315*^9}, {
+  3.6624020175139723`*^9, 3.662402021105197*^9}, {3.662405917477808*^9, 
+  3.662405920698826*^9}, {3.662405995735334*^9, 3.6624060001653843`*^9}, {
+  3.6626518546259613`*^9, 3.66265186009548*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   SubscriptBox["N", 
+    RowBox[{"vars", " "}]], "=", " ", "2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sig", " ", "=", " ", 
+   RowBox[{"GetSignature", "[", 
+    RowBox[{"2", " ", "*", " ", 
+     SubscriptBox["N", "vars"]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VarNames", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<A0\>\"", ",", "\"\<A1\>\"", ",", "\"\<B0\>\"", ",", "\"\<B1\>\""}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"T", " ", "=", " ", 
+   RowBox[{"GetTrans", "[", "sig", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ExpVec", " ", "=", " ", 
+   RowBox[{"Prepend", "[", 
+    RowBox[{
+     RowBox[{"GenerateNames", "[", 
+      RowBox[{"sig", ",", " ", "VarNames"}], "]"}], ",", " ", "1"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p", " ", "=", " ", 
+   RowBox[{"T", ".", "ExpVec"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Constraints", " ", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"First", "[", "p", "]"}], " ", "\[Equal]", " ", "1"}], ")"}], 
+    " ", "&&", 
+    RowBox[{"(", 
+     RowBox[{"And", " ", "@@", "\[NonBreakingSpace]", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Function", "[", 
+         RowBox[{"x", ",", " ", 
+          RowBox[{"x", "\[GreaterEqual]", "0"}]}], "]"}], " ", "/@", " ", 
+        RowBox[{"p", "[", 
+         RowBox[{"[", 
+          RowBox[{"2", ";;", 
+           RowBox[{"Length", "[", "p", "]"}]}], "]"}], "]"}]}], ")"}]}], 
+     ")"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.662392887733095*^9, 3.6623929044202623`*^9}, {
+   3.662394593020301*^9, 3.6623945943584347`*^9}, {3.662394709199854*^9, 
+   3.662394711944148*^9}, {3.6623947758820972`*^9, 3.662394776847197*^9}, {
+   3.6623948708799477`*^9, 3.662394893627676*^9}, {3.662395083405006*^9, 
+   3.662395083719122*^9}, {3.66239533821532*^9, 3.662395384172443*^9}, {
+   3.662397862309196*^9, 3.662397880292633*^9}, {3.6623985275473003`*^9, 
+   3.6623985410109797`*^9}, {3.6623992919764013`*^9, 3.662399311015059*^9}, {
+   3.662399599938635*^9, 3.662399623064974*^9}, {3.662400016837446*^9, 
+   3.6624000238113527`*^9}, {3.662400106876334*^9, 3.66240010695424*^9}, {
+   3.66240142304184*^9, 3.662401455246419*^9}, {3.662401846952752*^9, 
+   3.662401855975814*^9}, 3.662401896445836*^9, 3.662401931659696*^9, {
+   3.662406034116149*^9, 3.662406053772283*^9}, {3.662820770819785*^9, 
+   3.662820771449419*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"result", " ", "=", " ", 
+  RowBox[{"Timing", "[", 
+   RowBox[{"Resolve", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Exists", "[", 
+      RowBox[{
+       RowBox[{"Evaluate", "[", 
+        RowBox[{"ExpVec", "[", 
+         RowBox[{"[", 
+          RowBox[{"GenerateEliminations", "[", "sig", "]"}], "]"}], "]"}], 
+        "]"}], ",", " ", "Constraints"}], "]"}], ",", "\[IndentingNewLine]", 
+     "Reals"}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Save", "[", 
+  RowBox[{"\"\<chshE.m\>\"", ",", " ", "result"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6623993905803337`*^9, 3.662399436029771*^9}, {
+   3.6623995010758123`*^9, 3.662399528598022*^9}, {3.662399626287621*^9, 
+   3.662399723559779*^9}, 3.6624000315359163`*^9, {3.662400112886498*^9, 
+   3.662400122673419*^9}, 3.662400183570458*^9, 3.6624018850422792`*^9, 
+   3.662401942190905*^9, 3.6624060269459057`*^9, {3.662406074207012*^9, 
+   3.662406079512039*^9}, {3.662406913314786*^9, 3.662406922183552*^9}, {
+   3.662407017875923*^9, 3.6624070329868927`*^9}, {3.662407100403617*^9, 
+   3.662407109390011*^9}, {3.662407718542536*^9, 3.662407719610264*^9}, {
+   3.662651887494223*^9, 3.6626519601751013`*^9}, 3.662652029435542*^9, {
+   3.6626524737151337`*^9, 3.662652522328374*^9}, {3.6628207999380836`*^9, 
+   3.6628208086937*^9}, {3.662821046683259*^9, 3.66282106232136*^9}, 
+   3.6628211099140673`*^9, {3.662821203453618*^9, 3.662821212611042*^9}, {
+   3.66282350399188*^9, 3.662823511886442*^9}}]
+}, Open  ]]
+},
+WindowSize->{720, 851},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.1 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 23, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 216, 5, 28, "Input",
+ InitializationCell->True],
+Cell[777, 27, 1056, 25, 125, "Text"],
+Cell[1836, 54, 631, 18, 46, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[2492, 76, 216, 3, 65, "Chapter"],
+Cell[2711, 81, 1934, 47, 128, "Input",
+ InitializationCell->True],
+Cell[4648, 130, 254, 5, 30, "Text"],
+Cell[4905, 137, 2114, 58, 216, "Input",
+ InitializationCell->True],
+Cell[7022, 197, 1326, 33, 97, "Input",
+ InitializationCell->True],
+Cell[8351, 232, 2503, 60, 148, "Input"],
+Cell[10857, 294, 1551, 28, 114, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
