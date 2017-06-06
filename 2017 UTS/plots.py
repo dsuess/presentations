@@ -64,7 +64,7 @@ def recons_error(target, recov):
 @click.argument('key')
 @click.option('--infile', help='File to load pandas dataframe from', default='simdata.h5')
 def simplot(key, infile):
-    fig = pl.figure(0, figsize=(5, 4))
+    fig = pl.figure(0, figsize=(5.5, 4))
     print('Loading {} from {}'.format(key, infile))
     df = pd.read_hdf(infile, key)
 
@@ -90,7 +90,7 @@ def simplot(key, infile):
     fig = pl.figure(0, figsize=(10, 8))
     ax = fig.add_subplot(1, 1, 1)
 
-    ax.set_title(r'$\mathbb{P}\left(\Vert M - M^\sharp \Vert_2 < 10^{-3} n\right)$')
+    ax.set_title(r'$\mathbb{P}\left(\Vert M - M^\sharp \Vert_2 < 10^{-3} \times n\right)$')
     ax.set_xlabel(r'$n$ (dimension)')
     ax.set_ylabel(r'$m$ (number of measurements)')
 
@@ -103,9 +103,10 @@ def simplot(key, infile):
     ax.set_yticklabels(yticks[::-1])
     ax.grid(False)
 
-    ax.imshow(p_success.values[::-1], aspect='auto', cmap=pl.cm.gray)
+    img = ax.imshow(p_success.values[::-1], aspect='auto', cmap=pl.cm.gray)
+    fig.colorbar(img)
 
-    pl.savefig('sim_{}.pdf'.format(key))
+    fig.savefig('sim_{}.pdf'.format(key))
 
 
 ###############################################################################
