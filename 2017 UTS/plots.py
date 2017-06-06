@@ -63,7 +63,7 @@ def recons_error(target, recov):
 @main.command()
 @click.argument('key')
 @click.option('--infile', help='File to load pandas dataframe from', default='simdata.h5')
-def simplot(key, infile, errthresh):
+def simplot(key, infile):
     fig = pl.figure(0, figsize=(5, 4))
     print('Loading {} from {}'.format(key, infile))
     df = pd.read_hdf(infile, key)
@@ -76,7 +76,7 @@ def simplot(key, infile, errthresh):
     # Creating error & success variables
     df['recons_err'] = recons_error(df['target'], df['recons'])
     df['recons_err'].fillna(1.0, inplace=True)
-    df['recons_success'] = df['recons_err'] < errthresh * df['dim']
+    df['recons_success'] = df['recons_err'] < 1e-3 * df['dim']
 
     # create success matrix
     p_success = df.groupby(['dim', 'measurements']) \
@@ -202,7 +202,7 @@ def make_explot(datadir, key, ax, dipsref, offset=0.0, color='red'):
                 errors = np.abs(np.abs(recov) - np.abs(ref))
 
             artist = ax.scatter([counter + offset], np.mean(errors), marker='D',
-                                s=50, c=color)
+                                s=40, c=color)
             ax.scatter([counter + offset] * errors.size, np.ravel(errors), marker='x',
                        s=10, c=color)
 
