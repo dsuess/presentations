@@ -21,15 +21,16 @@ RGEN = np.random.RandomState(seed=274395387)
 
 ###############################################################################
 # lower and upper bounds of number of measurements (as a function of size)
-LBOUND = lambda dim: 5 * dim - 20
-UBOUND = lambda dim: 7 * dim - 20
+LBOUND = lambda dim: 5 * dim - 25
+UBOUND = lambda dim: 6 * dim - 5
 MSKIP = 2
 
 # Buffer file
 OUTFILE = 'noiseless_gaussian.h5'
 
 # the maximal dimension to check
-MAX_DIM = 16
+MIN_DIM = 2
+MAX_DIM = 12
 
 # Number of random matrices to sample
 SAMPLES = 100
@@ -122,7 +123,7 @@ def recover(args):
 
 with h5py.File(OUTFILE, 'w') as df:
     write_h5_header(df)
-    for dim in range(2, MAX_DIM + 1):
+    for dim in range(MIN_DIM, MAX_DIM + 1):
         dimgroup = df.create_group('DIM=%i' % dim)
         dimgroup.attrs['DIM'] = dim
 

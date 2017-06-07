@@ -13,6 +13,8 @@ import pypllon as plon
 from pypllon.parsers import load_simdata
 from glob import glob
 
+pl.style.use('ggplot')
+
 try:
     from tools.helpers import Progress
 except ImportError:
@@ -31,7 +33,7 @@ def main():
 @click.argument('h5file')
 @click.argument('key')
 @click.option('--outfile', help='File to save to', default='simdata.h5')
-@click.option('--append', help='If we should try to load existing dataframe under key',
+@click.option('--append/--overwrite', help='If we should try to load existing dataframe under key',
               default=True)
 def pandarize(h5file, key, outfile, append):
     with h5py.File(h5file, 'r') as infile:
@@ -76,7 +78,7 @@ def simplot(key, infile):
     # Creating error & success variables
     df['recons_err'] = recons_error(df['target'], df['recons'])
     df['recons_err'].fillna(1.0, inplace=True)
-    df['recons_success'] = df['recons_err'] < 1e-3 * df['dim']
+    df['recons_success'] = df['recons_err'] < 0.3 * df['dim']
 
     # create success matrix
     p_success = df.groupby(['dim', 'measurements']) \
@@ -165,7 +167,7 @@ def square_mean(x):
 
 
 EXDESC = {'Fou': 'Fourier', 'Id': 'Identity', 'Swap': 'Swap',
-          '_01': 'random', '_02': 'random', '_03': 'random'}
+          '_01': 'Random', '_02': 'Random', '_03': 'Random'}
 SIZEDESC = {'M2': '2x2', 'M3': '3x3', 'M5': '5x5'}
 EXDATAFILES = ['M2Fou.h5', 'M2Id.h5', 'M2_01.h5', 'M2_02.h5', 'M2_03.h5',
                'M3Fou.h5', 'M3Id.h5', 'M3_01.h5', 'M3_02.h5', 'M3_03.h5',
@@ -184,14 +186,14 @@ def id_to_label(the_id):
 def make_explot(datadir, key, ax, dipsref, offset=0.0, color='red'):
     for counter, datafile in enumerate(Progress(EXDATAFILES)):
         with h5py.File(datadir + datafile) as df:
-            try:
-                recov, _ = recover(df, key)
-            except KeyError as e:
-                if key == 'RECR_OFFSET':
+            if key == 'RECR_OFFSET':
+                try:
+                    recov, _ = recover(df, key)
+                except KeyError as e:
                     print(key, 'not found for', datafile, '(Using RECR instead.)')
                     recov, _ = recover(df, 'RECR')
-                else:
-                    raise e
+            else:
+                recov, _ = recover(df, key)
 
             ref, with_phases = get_dip_reference(df) if dipsref \
                 else (df['TARGET'], True)
@@ -204,8 +206,8 @@ def make_explot(datadir, key, ax, dipsref, offset=0.0, color='red'):
 
             artist = ax.scatter([counter + offset], np.mean(errors), marker='D',
                                 s=40, c=color)
-            ax.scatter([counter + offset] * errors.size, np.ravel(errors), marker='x',
-                       s=10, c=color)
+            ax.scatter([counter + offset] * errors.size, np.ravel(errors), marker='_',
+                       s=40, c=color, lw=1.5)
 
     return artist, counter
 
@@ -217,14 +219,14 @@ def make_explot(datadir, key, ax, dipsref, offset=0.0, color='red'):
 @click.option('--dipsref/--targetref', help='Use dips as reference, otherwise use target',
               default=True)
 def explot(key, datadir, dipsref):
-    fig = pl.figure(0, figsize=(7, 5))
+    fig = pl.figure(0, figsize=(9, 5))
     ax = fig.add_subplot(1, 1, 1)
 
-    if key == 'all':
+    if key != 'GAUSS':
         artist_gauss, counter = make_explot(datadir, 'GAUSS', ax, dipsref,
-                                            offset=-.2, color='red')
-        artist_recr, counter = make_explot(datadir, 'RECR_OFFSET', ax, dipsref,
-                                            offset=.2, color='blue')
+                                            offset=-.15, color='red')
+        artist_recr, counter = make_explot(datadir, key, ax, dipsref,
+                                            offset=.15, color='blue')
         fig.legend([artist_gauss, artist_recr], ['Gaussian', 'RECR'])
 
     else:
